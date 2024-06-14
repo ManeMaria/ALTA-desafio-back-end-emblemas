@@ -1,0 +1,51 @@
+name: CI - Pull Request - Pipeline
+
+on:
+  pull_request:
+    types: [review_requested, ready_for_review]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  continuous-integration:
+    runs-on: ubuntu-latest
+
+    #services:
+    #  db-test:
+    #    image: postgis/postgis:14-3.3-alpine
+    #    env:
+    #      POSTGRES_DB: test
+    #      POSTGRES_USER: test
+    #      POSTGRES_PASSWORD: test
+    #    ports:
+    #      - '5432:5432'
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.13.0
+          cache: 'npm'
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Generate prisma
+        run: npm run prisma:generate
+
+      - name: Linting
+        run: npm run lint:check
+
+      - name: Style
+        run: npm run style:check
+

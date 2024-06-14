@@ -1,0 +1,12 @@
+{
+  "editor.formatOnSave": false,
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "files.eol": "\n",
+  "cmake.configureOnOpen": true,
+}

@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2018",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "plugins": [
+      {
+        "transform": "ts-auto-mock/transformer",
+        "cacheBetweenTests": false
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@/api/*": [
+        "src/apps/*"
+      ],
+      "@/api-users/*": [
+        "src/apps/api-users/*"
+      ],
+      "@/users/*": [
+        "src/apps/users/*"
+      ],
+      "@/notifications/*": [
+        "src/apps/notifications/*"
+      ],
+    }
+  }
+}
