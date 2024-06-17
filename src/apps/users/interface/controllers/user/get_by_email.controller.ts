@@ -13,6 +13,7 @@ import {
   Length,
   Min,
 } from 'class-validator';
+import { Roles } from '@/core/domain';
 
 export type TGetUserByEmailRequest = Pick<User, 'email'>;
 export type TGetUserByEmailResponse = Omit<User, 'isConfirmed'>;
@@ -49,6 +50,9 @@ export class GetUserByEmailResponse
 
   @IsEmail()
   email: User['email'];
+
+  @IsEnum(Roles)
+  roles: User['roles'];
 
   @IsString()
   @Length(8)
@@ -89,6 +93,7 @@ export class GetUserByEmailController
         state: user.state,
         name: user.name,
         email: user.email,
+        roles: user.roles,
         password: user.password,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,

@@ -1,4 +1,4 @@
-import { Email } from '@/notifications/domain';
+import { Email } from '@/users/domain';
 
 export interface IEmailRepository {
   save(email: Email): Promise<Email>;

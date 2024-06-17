@@ -1,12 +1,7 @@
 import { Email as EmailInPrisma } from '@prisma/client';
-import {
-  Email,
-  EmailEntity,
-  EmailState,
-  EmailTemplateEntity,
-} from '@/notifications/domain';
+import { Email, EmailEntity, EmailState } from '@/users/domain';
 import { PrismaService } from '@/libs/prisma';
-import { IEmailRepository } from '@/notifications/application';
+import { IEmailRepository } from '@/users/application';
 import { UserEntity } from '@/users/domain';
 import { Injectable } from '@nestjs/common';
 
@@ -15,10 +10,6 @@ export class PrismaEmailRepository implements IEmailRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   static toDomain(emailInPrisma: EmailInPrisma): Email {
-    const template = new EmailTemplateEntity({
-      id: emailInPrisma.templateId,
-    });
-
     const user =
       emailInPrisma.userId &&
       new UserEntity({
@@ -29,7 +20,6 @@ export class PrismaEmailRepository implements IEmailRepository {
       id: emailInPrisma.id,
       serial: emailInPrisma.serial,
       state: EmailState[emailInPrisma.state],
-      template,
       to: emailInPrisma.to,
       from: emailInPrisma.from,
       title: emailInPrisma.title,
@@ -47,13 +37,17 @@ export class PrismaEmailRepository implements IEmailRepository {
       data: {
         id: email.id,
         state: email.state,
-        templateId: email.template.id,
-        userId: email.user?.id,
         to: email.to,
         from: email.from,
         title: email.title,
         body: email.body,
         html: email.html,
+
+        user: {
+          connect: {
+            id: email.user?.id,
+          },
+        },
       },
     });
 
@@ -67,7 +61,6 @@ export class PrismaEmailRepository implements IEmailRepository {
       },
       data: {
         state: email.state,
-        templateId: email.template.id,
         userId: email.user?.id,
         to: email.to,
         from: email.from,

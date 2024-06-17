@@ -18,8 +18,12 @@ export * from './exceptions/user_confirmation/user_confirmation_expired.exceptio
 export * from './repos/user.repository';
 export * from './repos/user_confirmation.repository';
 export * from './repos/user_forgot_password.repository';
+export * from './repos/email.repository';
+export * from './repos/user_confirmation.repository';
+export * from './repos/user_forgot_password.repository';
 
 export * from './services/notification.service';
+export * from './services/email.service';
 
 export * from './usecases/user/create.usecase';
 export * from './usecases/user/delete_user_by_id.usecase';
@@ -28,7 +32,6 @@ export * from './usecases/user/get_users_by_filter.usecase';
 export * from './usecases/user/update_user.usecase';
 export * from './usecases/user/confirm.usecase';
 export * from './usecases/user/create_user_forgot_password';
-export * from './usecases/user/handle_user_created.usecase';
 
 export * from './usecases/user/get_by_email.usecase';
 

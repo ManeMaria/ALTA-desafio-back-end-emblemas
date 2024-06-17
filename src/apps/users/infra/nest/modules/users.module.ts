@@ -9,6 +9,7 @@ import {
   PrismaUserForgotPasswordRepository,
   PrismaUserRepository,
   UpdateUserForgotPasswordNestService,
+  PrismaEmailRepository,
 } from '@/users/infra';
 import { PrismaModule } from '@/libs/prisma';
 
@@ -24,6 +25,7 @@ import { PrismaModule } from '@/libs/prisma';
     CreateUserNestService,
     ConfirmUserNestService,
     NotificationService,
+    PrismaEmailRepository,
   ],
   exports: [
     CreateUserNestService,
@@ -31,6 +33,7 @@ import { PrismaModule } from '@/libs/prisma';
     GetUserByEmailNestService,
     CreateUserForgotPasswordNestService,
     UpdateUserForgotPasswordNestService,
+    NotificationService,
   ],
 })
 export class UsersModule {}

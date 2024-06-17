@@ -1,4 +1,4 @@
-import { Domain, DomainEntity } from '@/core/domain';
+import { Domain, DomainEntity, Roles } from '@/core/domain';
 
 export enum UserState {
   CONFIRMED = 'CONFIRMED',
@@ -11,6 +11,7 @@ export interface User extends Domain {
   email: string;
   password: string;
 
+  roles: Roles;
   isConfirmed(): boolean;
 }
 
@@ -19,6 +20,7 @@ export class UserEntity extends DomainEntity implements User {
   name: string;
   email: string;
   password: string;
+  roles: Roles;
 
   constructor(props: Partial<User>) {
     super(props);
@@ -26,6 +28,7 @@ export class UserEntity extends DomainEntity implements User {
     this.state = props.state;
     this.name = props.name;
     this.email = props.email;
+    this.roles = props.roles;
     this.password = props.password;
   }
 

@@ -1,5 +1,6 @@
 import {
   CreateUserForgotPasswordUseCase,
+  IEmailRepository,
   INotificationService,
   IUserForgotPasswordRepository,
   IUserRepository,
@@ -49,11 +50,13 @@ export class CreateUserForgotPasswordController
     userRepository: IUserRepository,
     userForgotPasswordRepository: IUserForgotPasswordRepository,
     notificationService: INotificationService,
+    emailRepository: IEmailRepository,
   ) {
     this.usecase = new CreateUserForgotPasswordUseCase(
       userRepository,
       userForgotPasswordRepository,
       notificationService,
+      emailRepository,
     );
   }
 

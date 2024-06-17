@@ -10,6 +10,7 @@ import {
   IsUUID,
   Length,
 } from 'class-validator';
+import { Roles } from '@/core/domain';
 
 export type TGetUserByIdRequest = Pick<User, 'id'>;
 export type TGetUserByIdResponse = Omit<User, 'password' | 'isConfirmed'>;
@@ -43,6 +44,9 @@ export class GetUserByIdResponse
   @IsString()
   @Length(1, 255)
   email: string;
+
+  @IsEnum(Roles)
+  roles: Roles;
 
   @IsOptional()
   @IsDate()

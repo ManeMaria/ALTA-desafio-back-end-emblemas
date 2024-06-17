@@ -1,6 +1,5 @@
 import { Domain, DomainEntity } from '@/core/domain';
 import { User } from '@/users/domain';
-import { EmailTemplate } from './email_template.entity';
 
 export enum EmailState {
   PENDING = 'PENDING',
@@ -10,9 +9,8 @@ export enum EmailState {
 
 export interface Email extends Domain {
   state: EmailState;
-  template: EmailTemplate;
   to: string;
-  from: string;
+  from?: string;
   title?: string;
   body?: string;
   html?: string;
@@ -21,7 +19,6 @@ export interface Email extends Domain {
 
 export class EmailEntity extends DomainEntity implements Email {
   state: EmailState;
-  template: EmailTemplate;
   to: string;
   from: string;
   title?: string;
@@ -33,7 +30,6 @@ export class EmailEntity extends DomainEntity implements Email {
     super(props);
 
     this.state = props.state;
-    this.template = props.template;
     this.to = props.to;
     this.from = props.from;
     this.title = props.title;

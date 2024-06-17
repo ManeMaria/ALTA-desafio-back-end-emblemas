@@ -1,23 +1,18 @@
-import { Email } from '@/notifications/domain';
+import { Email, EmailState } from '@/users/domain';
 import { User } from '@/users/domain';
 
 export type TSendConfirmationEmail = {
-  userId: User['id'];
-  name: User['name'];
+  state: EmailState;
+  to: string;
+  from?: string;
+  title?: string;
+  body?: string;
+  html?: string;
+  user?: User;
 };
 
 export interface INotificationService {
-  sendConfirmationEmail(
-    to: Email['to'],
-    userId: User['id'],
-    name: User['name'],
-    code: string,
-  ): Promise<void>;
+  sendConfirmationEmail(params: Email): Promise<void>;
 
-  sendForgotPasswordEmail(
-    to: Email['to'],
-    userId: User['id'],
-    name: User['name'],
-    code: string,
-  ): Promise<void>;
+  sendForgotPasswordEmail(params: Email): Promise<void>;
 }
