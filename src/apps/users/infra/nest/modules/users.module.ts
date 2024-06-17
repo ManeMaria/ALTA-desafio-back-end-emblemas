@@ -10,6 +10,10 @@ import {
   PrismaUserRepository,
   UpdateUserForgotPasswordNestService,
   PrismaEmailRepository,
+  PrismaEmblemsRepository,
+  PrismaRedeemEmblemsRepository,
+  CreateRedeemEmblemNestService,
+  GetRedeemEmblemByUserIdNestService,
 } from '@/users/infra';
 import { PrismaModule } from '@/libs/prisma';
 
@@ -26,6 +30,10 @@ import { PrismaModule } from '@/libs/prisma';
     ConfirmUserNestService,
     NotificationService,
     PrismaEmailRepository,
+    PrismaEmblemsRepository,
+    PrismaRedeemEmblemsRepository,
+    CreateRedeemEmblemNestService,
+    GetRedeemEmblemByUserIdNestService,
   ],
   exports: [
     CreateUserNestService,
@@ -34,6 +42,8 @@ import { PrismaModule } from '@/libs/prisma';
     CreateUserForgotPasswordNestService,
     UpdateUserForgotPasswordNestService,
     NotificationService,
+    CreateRedeemEmblemNestService,
+    GetRedeemEmblemByUserIdNestService,
   ],
 })
 export class UsersModule {}

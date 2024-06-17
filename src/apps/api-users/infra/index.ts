@@ -15,5 +15,8 @@ export * from './nest/controllers/auth/update_forgot_password.controller';
 
 export * from './nest/controllers/users/create_user.controller';
 export * from './nest/controllers/users/confirm_user.controller';
+export * from './nest/controllers/users/confirm_user.controller';
+export * from './nest/controllers/users/create_redeem_emblem.controller';
+export * from './nest/controllers/users/get_redeem_emblem_by_user_id.controller';
 
 export * from './nest/modules/api_users.module';

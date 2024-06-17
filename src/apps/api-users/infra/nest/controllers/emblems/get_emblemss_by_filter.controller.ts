@@ -23,24 +23,28 @@ class GetEmblemssByFilterRestQuery extends PickType(
   @ApiProperty({
     description: 'Emblems id.',
     example: '882e725d-d9c5-45b6-b37d-c19834d8c090',
+    required: false,
   })
   refId: string;
 
   @ApiProperty({
     description: 'Emblems name.',
     example: 'Cidade',
+    required: false,
   })
   name: string;
 
   @ApiProperty({
     description: 'Emblems name.',
     example: 'cda',
+    required: false,
   })
   id: number;
 
   @ApiProperty({
     description: 'Emblems slug.',
     example: '1',
+    required: false,
   })
   slug: string;
 }
@@ -128,7 +132,7 @@ class GetEmblemssByFilterRestResponse {
 }
 
 @ApiTags('Emblems')
-@Controller('Emblems')
+@Controller('emblems')
 export class GetEmblemssByFilterRestController {
   constructor(
     private readonly getEmblemssByFilterService: GetEmblemssByFilterNestService,
