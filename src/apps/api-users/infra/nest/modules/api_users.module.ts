@@ -5,7 +5,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { UsersModule } from './users.module';
 import { AuthModule } from './auth.module';
 import { RateLimitModule } from './rate_limit.module';
-import { NotificationsModule } from '@/apps/notifications/infra';
+import { NodemailerModule } from '@/libs/nodemailer';
 
 @Module({
   imports: [
@@ -14,8 +14,8 @@ import { NotificationsModule } from '@/apps/notifications/infra';
     JwtModule,
     AuthModule,
     UsersModule,
-    NotificationsModule,
     RateLimitModule,
+    NodemailerModule,
   ],
 })
 export class ApiUsersModule {}

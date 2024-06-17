@@ -53,7 +53,10 @@ async function bootstrap() {
 
   app.enableCors(corsOptions);
 
-  const appPort = configService.get<number>('API_PORT', 5000);
+  const appPort = configService.get<number>(
+    'API_PORT',
+    Number(process.env.PORT) ?? 5000,
+  );
   const appEnv = configService.get<string>('NODE_ENV', process.env.NODE_ENV);
 
   // Build OpenAPI server.

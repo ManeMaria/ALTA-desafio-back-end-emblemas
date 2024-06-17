@@ -6,6 +6,7 @@ import {
 } from '@/users/interface';
 import {
   NotificationService,
+  PrismaEmailRepository,
   PrismaUserForgotPasswordRepository,
   PrismaUserRepository,
 } from '@/users/infra';
@@ -19,11 +20,13 @@ export class CreateUserForgotPasswordNestService {
     userRepository: PrismaUserRepository,
     userForgotPasswordRepository: PrismaUserForgotPasswordRepository,
     notificationService: NotificationService,
+    emailRepository: PrismaEmailRepository,
   ) {
     this.controller = new CreateUserForgotPasswordController(
       userRepository,
       userForgotPasswordRepository,
       notificationService,
+      emailRepository,
     );
   }
 

@@ -16,7 +16,10 @@ export interface TUpdateUserRequest {
   name?: string;
   email?: string;
 }
-export type TUpdateUserResponse = Omit<User, 'password' | 'isConfirmed'>;
+export type TUpdateUserResponse = Omit<
+  User,
+  'password' | 'isConfirmed' | 'roles'
+>;
 
 export class UpdateUserRequest
   extends AutoValidator

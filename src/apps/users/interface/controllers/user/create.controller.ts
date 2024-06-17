@@ -1,13 +1,20 @@
-import { CreateUserUseCase, IUserRepository } from '@/users/application';
+import {
+  CreateUserUseCase,
+  IEmailRepository,
+  INotificationService,
+  IUserConfirmationRepository,
+  IUserRepository,
+} from '@/users/application';
 import { User, UserState } from '@/users/domain';
 import { IController } from '@/core/interface';
 import { AutoValidator } from '@/libs/class-validator';
 import { IsEmail, IsEnum, IsString, IsUUID, Length } from 'class-validator';
+import { Roles } from '@/core/domain';
 
 export type TCreateUserRequest = Pick<User, 'name' | 'email' | 'password'>;
 export type TCreateUserResponse = Pick<
   User,
-  'id' | 'name' | 'email' | 'state' | 'createdAt'
+  'id' | 'name' | 'email' | 'state' | 'createdAt' | 'roles'
 >;
 
 export class CreateUserRequest
@@ -40,6 +47,9 @@ export class CreateUserResponse
   @IsEnum(UserState)
   state: User['state'];
 
+  @IsEnum(Roles)
+  roles: User['roles'];
+
   @IsString()
   @Length(1, 255)
   name: User['name'];
@@ -57,8 +67,18 @@ export class CreateUserController
 {
   private usecase: CreateUserUseCase;
 
-  constructor(userRepository: IUserRepository) {
-    this.usecase = new CreateUserUseCase(userRepository);
+  constructor(
+    userConfirmationRepository: IUserConfirmationRepository,
+    userRepository: IUserRepository,
+    notificationService: INotificationService,
+    emailRepository: IEmailRepository,
+  ) {
+    this.usecase = new CreateUserUseCase(
+      userConfirmationRepository,
+      userRepository,
+      notificationService,
+      emailRepository,
+    );
   }
 
   async execute(request: CreateUserRequest): Promise<CreateUserResponse> {
@@ -73,6 +93,7 @@ export class CreateUserController
       state: userCreated.state,
       name: userCreated.name,
       email: userCreated.email,
+      roles: userCreated.roles,
     });
   }
 }

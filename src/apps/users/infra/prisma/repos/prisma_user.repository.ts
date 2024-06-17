@@ -3,6 +3,7 @@ import { User, UserEntity, UserState } from '@/users/domain';
 import { IUserRepository, UserFilters } from '@/users/application';
 import { PrismaService } from '@/libs/prisma';
 import { Injectable } from '@nestjs/common';
+import { Roles } from '@/core/domain';
 
 @Injectable()
 export class PrismaUserRepository implements IUserRepository {
@@ -15,6 +16,7 @@ export class PrismaUserRepository implements IUserRepository {
       state: UserState[userInPrisma.state],
       name: userInPrisma.name,
       email: userInPrisma.email,
+      roles: Roles[userInPrisma.roles],
       password: userInPrisma.password,
       createdAt: userInPrisma.createdAt,
       updatedAt: userInPrisma.updatedAt,
