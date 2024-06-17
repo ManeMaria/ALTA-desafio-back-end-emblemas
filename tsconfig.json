@@ -40,6 +40,9 @@
       "@/notifications/*": [
         "src/apps/notifications/*"
       ],
+      "@/emblems/*": [
+        "src/apps/emblems/*"
+      ],
     }
   }
 }

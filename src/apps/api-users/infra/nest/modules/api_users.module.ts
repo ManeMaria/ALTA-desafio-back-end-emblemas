@@ -6,6 +6,7 @@ import { UsersModule } from './users.module';
 import { AuthModule } from './auth.module';
 import { RateLimitModule } from './rate_limit.module';
 import { NodemailerModule } from '@/libs/nodemailer';
+import { EmblemsModule } from './emblems.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { NodemailerModule } from '@/libs/nodemailer';
     UsersModule,
     RateLimitModule,
     NodemailerModule,
+    EmblemsModule,
   ],
 })
 export class ApiUsersModule {}

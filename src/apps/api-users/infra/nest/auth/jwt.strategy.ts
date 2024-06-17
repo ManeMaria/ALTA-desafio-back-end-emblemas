@@ -23,12 +23,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const { email } = accessToken;
 
     const user = await this.getUserByEmailService.execute({ email });
-
     if (!user) {
       throw new UnauthorizedException();
     }
 
-    // We can implement a cache set here to save token - user informations and by-pass database.
+    //TODO: implementar cache para bucar dados de usuários
 
     const authUser: AuthUser = {
       id: user.id,

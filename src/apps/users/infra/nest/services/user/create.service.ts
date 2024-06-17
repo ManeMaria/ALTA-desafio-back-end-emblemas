@@ -31,11 +31,7 @@ export class CreateUserNestService {
   }
 
   async execute(params: TCreateUserRequest): Promise<CreateUserResponse> {
-    const request = new CreateUserRequest({
-      name: params.email,
-      email: params.email,
-      password: params.password,
-    });
+    const request = new CreateUserRequest(params);
 
     const response = await this.controller.execute(request);
 

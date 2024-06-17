@@ -21,25 +21,27 @@ model User {
   roles              String               @default("USER")
   confirmations      UserConfirmation[]
   UserForgotPassword UserForgotPassword[]
+  EmblemsToUsers     EmblemsToUsers[]
 
   @@map("users")
 }
 
 model UserConfirmation {
-  id          String    @id @default(uuid()) @db.Uuid
-  serial      Int       @default(autoincrement())
-  state       String
-  code        String
-  attempts    Int
-  email       String
-  user        User      @relation(fields: [userId], references: [id])
-  userId      String    @map("user_id") @db.Uuid
-  confirmedAt DateTime? @map("confirmed_at")
-  expiredAt   DateTime? @map("expired_at")
-  declinedAt  DateTime? @map("declined_at")
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @updatedAt @map("updated_at")
-  deletedAt   DateTime? @map("deleted_at")
+  id             String           @id @default(uuid()) @db.Uuid
+  serial         Int              @default(autoincrement())
+  state          String
+  code           String
+  attempts       Int
+  email          String
+  user           User             @relation(fields: [userId], references: [id])
+  userId         String           @map("user_id") @db.Uuid
+  confirmedAt    DateTime?        @map("confirmed_at")
+  expiredAt      DateTime?        @map("expired_at")
+  declinedAt     DateTime?        @map("declined_at")
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+  deletedAt      DateTime?        @map("deleted_at")
+  emblemsToUsers EmblemsToUsers[]
 
   @@map("users_confirmations")
 }
@@ -79,4 +81,36 @@ model Email {
   deletedAt DateTime? @map("deleted_at")
 
   @@map("emails")
+}
+
+model Emblems {
+  refId          String           @id @default(uuid()) @db.Uuid
+  id             Int              @default(autoincrement())
+  name           String
+  image          String
+  slug           String           @unique
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+  deletedAt      DateTime?        @map("deleted_at")
+  emblemsToUsers EmblemsToUsers[]
+
+  @@map("emblems")
+}
+
+model EmblemsToUsers {
+  id String @id @default(uuid()) @db.Uuid
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String? @map("user_id") @db.Uuid
+
+  emblems   Emblems? @relation(fields: [emblemsId], references: [refId])
+  emblemsId String?  @map("emblems_id") @db.Uuid
+
+  createdAt          DateTime          @default(now()) @map("created_at")
+  updatedAt          DateTime          @updatedAt @map("updated_at")
+  deletedAt          DateTime?         @map("deleted_at")
+  UserConfirmation   UserConfirmation? @relation(fields: [userConfirmationId], references: [id])
+  userConfirmationId String?           @db.Uuid
+
+  @@map("emblems_to_users")
 }
