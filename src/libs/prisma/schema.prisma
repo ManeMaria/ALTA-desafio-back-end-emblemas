@@ -114,3 +114,14 @@ model EmblemsToUsers {
 
   @@map("emblems_to_users")
 }
+
+model RedeemEmblem {
+  id        String    @id @default(uuid()) @db.Uuid
+  serial    Int       @default(autoincrement())
+  name      String    @unique
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("redeem_emblems")
+}

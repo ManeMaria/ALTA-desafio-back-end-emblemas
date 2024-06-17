@@ -29,6 +29,7 @@ export class EmblemsEntity implements Emblems {
     this.slug = props.slug;
     this.image = props.image;
     this.refId = props.refId ?? uuid();
+
     this.createdAt = props.createdAt;
     this.updatedAt = props.updatedAt;
     this.deletedAt = props.deletedAt;
