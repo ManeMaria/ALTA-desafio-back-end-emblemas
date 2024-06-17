@@ -17,6 +17,7 @@ import { IORedisModule } from '@/libs/ioredis';
 import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { BcryptModule } from '@/libs/bcrypt';
+import { EmblemsModule } from '@/apps/emblems/infra';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { BcryptModule } from '@/libs/bcrypt';
     UsersModule,
     IORedisModule,
     BcryptModule,
+    EmblemsModule,
   ],
   controllers: [
     LoginRestController,

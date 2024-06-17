@@ -19,12 +19,10 @@ function openapi(app: INestApplication) {
     .setTitle('badge redemption')
     .setDescription('The badge redemption API description')
     .setVersion('1.0')
-    .addBearerAuth({
-      type: 'http',
-      name: 'Authorization',
-      bearerFormat: 'Bearer',
-      in: 'Header',
-    })
+    .addBearerAuth(
+      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      'access_token',
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
